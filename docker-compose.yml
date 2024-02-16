@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  nginx1:
+    image: nginx:latest
+    ports:
+      - "8081:80"
+    volumes:
+      - ./nginx1:/usr/share/nginx/html
+    networks:
+      - my_network
+
+  nginx2:
+    image: nginx:latest
+    ports:
+      - "8082:80"
+    volumes:
+      - ./nginx2:/usr/share/nginx/html
+    networks:
+      - my_network
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: NJ66RcZf
+      MYSQL_DATABASE: Dockerdatabase
+      MYSQL_USER: user-etudient
+      MYSQL_PASSWORD: NJ66RcZf
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
